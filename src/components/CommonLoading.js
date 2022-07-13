@@ -1,7 +1,6 @@
 import { Backdrop } from "@mui/material";
-import React from "react";
 import { useSelector } from "react-redux";
-import LoadingAnimation from "./LoadingAnimation";
+import LoadingAnimation from "./animations/LoadingAnimation";
 
 export default function CommonLoading() {
   const isLoading = useSelector((state) => state?.app?.isLoading ?? false);

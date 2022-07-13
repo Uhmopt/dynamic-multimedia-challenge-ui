@@ -7,7 +7,7 @@ import {
   DialogTitle,
   Grid,
 } from "@mui/material";
-import QuestionAnimation from "./QuestionAnimation";
+import QuestionAnimation from "./animations/QuestionAnimation";
 
 export default function ConfirmModal({
   isOpen = false,
