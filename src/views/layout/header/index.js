@@ -1,7 +1,5 @@
-import { Code, GitHub } from "@mui/icons-material";
-import { AppBar, Button, Toolbar, Typography } from "@mui/material";
-import CustomLink from "components/CustomLink";
-import { GITHUB, REPOSITORY } from "config";
+import { AppBar, Toolbar, Typography } from "@mui/material";
+import Menus from "./Menus";
 
 export default function Header() {
   return (
@@ -20,18 +18,7 @@ export default function Header() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             My Reading List
           </Typography>
-          <div className="sm-down:hidden flex items-center">
-            <CustomLink to={GITHUB} target="_blank">
-              <Button color="inherit" startIcon={<GitHub />}>
-                Github
-              </Button>
-            </CustomLink>
-            <CustomLink to={REPOSITORY} target="_blank">
-              <Button color="inherit" startIcon={<Code />}>
-                Show Code
-              </Button>
-            </CustomLink>
-          </div>
+          <Menus />
         </Toolbar>
       </AppBar>
     </div>

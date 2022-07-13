@@ -1,3 +1,4 @@
+import { checkExternalLink } from "lib/strings";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -9,8 +10,7 @@ export default function CustomLink({
 }) {
   const address = to || href || "#";
 
-  const isExternal =
-    address.includes("http://") || address.includes("https://");
+  const isExternal = checkExternalLink(address);
 
   return isExternal ? (
     <a href={address} target={target}>

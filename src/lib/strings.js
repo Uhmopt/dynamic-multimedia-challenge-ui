@@ -26,3 +26,6 @@ export const getValidationMessage = (type = "", name = "") => {
 
 export const readableToSnake = (str = "") =>
   String(str).toLowerCase().replace(/[^\w]/g, "_");
+
+export const checkExternalLink = (str = "") =>
+  String(str).includes("http://") || String(str).includes("https://");
