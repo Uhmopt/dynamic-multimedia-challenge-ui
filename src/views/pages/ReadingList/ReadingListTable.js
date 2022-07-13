@@ -1,7 +1,7 @@
 import { Add } from "@mui/icons-material";
 import { Button, Grid } from "@mui/material";
 import EditFormGroup from "components/EditFormGroup";
-import { MSG_INPUT_ALL } from "constants/messages";
+import { ERR_NETWORK, MSG_INPUT_ALL } from "constants/messages";
 import { formatArray } from "lib/arrayObject";
 import { openLoading } from "lib/store";
 import { getReadingList, saveReadingList } from "models/readingListModel";
@@ -28,8 +28,10 @@ export default function ReadingListTable({ user = {} }) {
       data: submitData,
       onFinish: (res) => {
         if (res) {
+          setFormData({});
           loadData();
         } else {
+          enqueueSnackbar(ERR_NETWORK.LONG, { variant: "warning" });
           openLoading(false);
         }
       },
