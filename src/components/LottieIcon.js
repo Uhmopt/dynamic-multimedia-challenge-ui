@@ -3,7 +3,7 @@ import React from "react";
 import Lottie from "react-lottie";
 
 export default function LottieIcon({
-  width = 200,
+  width = window.innerWidth < 600 ? 200 : 350,
   data = successData,
   loop = false,
 }) {

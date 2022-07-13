@@ -6,10 +6,8 @@ import {
   DialogContent,
   DialogTitle,
   Grid,
-  useMediaQuery,
-  useTheme,
 } from "@mui/material";
-import React from "react";
+import QuestionAnimation from "./QuestionAnimation";
 
 export default function ConfirmModal({
   isOpen = false,
@@ -34,17 +32,15 @@ export default function ConfirmModal({
       }}
       fullWidth
       maxWidth="sm"
-      fullScreen={useMediaQuery(useTheme().breakpoints.down("sm"))}
     >
       <DialogTitle>{title || "Are you sure?"}</DialogTitle>
-      {message ? <DialogContent>{message}</DialogContent> : null}
+      {message ? (
+        <DialogContent>{message}</DialogContent>
+      ) : (
+        <QuestionAnimation />
+      )}
       <DialogActions>
-        <Grid
-          container
-          spacing={1}
-          justifyContent="flex-end"
-          alignItems="center"
-        >
+        <Grid container spacing={1} justifyContent="center" alignItems="center">
           <Grid item>
             <Button
               onClick={() => {
@@ -85,7 +81,7 @@ export default function ConfirmModal({
               </Button>
             )}
           </Grid>
-          <Grid item>{footer}</Grid>
+          {footer ? <Grid item>{footer}</Grid> : null}
         </Grid>
       </DialogActions>
     </Dialog>
