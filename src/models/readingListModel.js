@@ -1,5 +1,13 @@
 export const getReadingList = ({ user = {}, onFinish = () => {} }) => {
-  onFinish(DEFAULT_READING_LIST);
+  setTimeout(() => {
+    onFinish(DEFAULT_READING_LIST);
+  }, 3000);
+};
+
+export const saveReadingList = ({ data = {}, onFinish = () => {} }) => {
+  setTimeout(() => {
+    onFinish(true);
+  }, 3000);
 };
 
 export const DEFAULT_READING_LIST = [

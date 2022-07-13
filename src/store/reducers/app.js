@@ -6,6 +6,7 @@ const initialState = {};
 const restoreState = {
   ...initialState,
   ...(jsonParse(localStorage.getItem(APP_NAME))?.app ?? {}),
+  isLoading: false,
 };
 
 const app = (state = restoreState, { type, payload = null }) => {

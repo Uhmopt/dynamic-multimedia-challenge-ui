@@ -3,7 +3,8 @@ import { Button, Grid } from "@mui/material";
 import EditFormGroup from "components/EditFormGroup";
 import { MSG_INPUT_ALL } from "constants/messages";
 import { formatArray } from "lib/arrayObject";
-import { getReadingList } from "models/readingListModel";
+import { openLoading } from "lib/store";
+import { getReadingList, saveReadingList } from "models/readingListModel";
 import { useSnackbar } from "notistack";
 import { useEffect, useRef, useState } from "react";
 import ReadingListCard from "./ReadingListCard";
@@ -21,6 +22,18 @@ export default function ReadingListTable({ user = {} }) {
       enqueueSnackbar(MSG_INPUT_ALL.LONG, { variant: "warning" });
       return false;
     }
+
+    openLoading(true);
+    saveReadingList({
+      data: submitData,
+      onFinish: (res) => {
+        if (res) {
+          loadData();
+        } else {
+          openLoading(false);
+        }
+      },
+    });
   };
 
   const loadData = () => {
@@ -28,11 +41,13 @@ export default function ReadingListTable({ user = {} }) {
       user_id: user?.id ?? "",
       onFinish: (res) => {
         setData(formatArray(res));
+        openLoading(false);
       },
     });
   };
 
   useEffect(() => {
+    openLoading(true);
     loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id]);

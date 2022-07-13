@@ -1,5 +1,6 @@
 import { Slide, ThemeProvider } from "@mui/material";
 import "App.css";
+import CommonLoading from "components/CommonLoading";
 import { SnackbarProvider } from "notistack";
 import { Provider } from "react-redux";
 import Root from "routes";
@@ -22,6 +23,7 @@ function App() {
           TransitionComponent={Slide}
           hideIconVariant={true}
         >
+          <CommonLoading />
           <Root />
         </SnackbarProvider>
       </ThemeProvider>
