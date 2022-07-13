@@ -1,4 +1,4 @@
-import { YMDHMS } from "contants/dateWords";
+import { YMDHMS } from "constants/dateWords";
 import http from "lib/http";
 import { isObject } from "lodash";
 import moment from "moment";

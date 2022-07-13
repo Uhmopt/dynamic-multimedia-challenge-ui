@@ -67,35 +67,12 @@ export const lightTheme = createTheme({
         lineHeight: "35px",
       },
     },
-
-    body2: {
-      fontStyle: "normal",
-      fontWeight: 400,
-      fontSize: 22,
-      lineHeight: "26px",
-      "@media (max-width:600px)": {
-        fontSize: 14,
-        lineHeight: "30px",
-      },
-    },
-
-    subtitle2: {
-      fontStyle: "normal",
-      fontWeight: 300,
-      fontSize: 16,
-      lineHeight: "19px",
-      "@media (max-width:600px)": {
-        fontSize: 12,
-        lineHeight: "30px",
-      },
-    },
   },
   components: {
     MuiBackdrop: {
       styleOverrides: {
         root: {
           backdropFilter: "blur(5px)",
-          background: `${PRIMARY_COLOR}88`,
         },
       },
     },

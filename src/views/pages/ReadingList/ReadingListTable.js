@@ -1,12 +1,27 @@
 import { Add } from "@mui/icons-material";
-import { Alert, AlertTitle, Button, Grid } from "@mui/material";
-import CustomTypo from "components/CustomTypo";
+import { Button, Grid } from "@mui/material";
+import EditFormGroup from "components/EditFormGroup";
+import { MSG_INPUT_ALL } from "constants/messages";
 import { formatArray } from "lib/arrayObject";
 import { getReadingList } from "models/readingListModel";
-import { useEffect, useState } from "react";
+import { useSnackbar } from "notistack";
+import { useEffect, useRef, useState } from "react";
+import ReadingListCard from "./ReadingListCard";
 
 export default function ReadingListTable({ user = {} }) {
+  const { enqueueSnackbar } = useSnackbar();
   const [data, setData] = useState([]);
+  const [formData, setFormData] = useState({});
+
+  const formRef = useRef();
+
+  const handleAdd = () => {
+    const submitData = formRef.current.prepare();
+    if (!submitData) {
+      enqueueSnackbar(MSG_INPUT_ALL.LONG, { variant: "warning" });
+      return false;
+    }
+  };
 
   const loadData = () => {
     getReadingList({
@@ -17,8 +32,6 @@ export default function ReadingListTable({ user = {} }) {
     });
   };
 
-  const handleRemove = (value, valueIndex) => {};
-
   useEffect(() => {
     loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -26,31 +39,47 @@ export default function ReadingListTable({ user = {} }) {
 
   return (
     <div>
-      <Grid container spacing={2} justifyContent="flex-end">
+      <Grid container spacing={2} justifyContent="center">
+        {formatArray(data).map((item, itemIndex) => (
+          <Grid key={itemIndex} item lg={12} md={12} sm={12} xs={12}>
+            <ReadingListCard
+              title={item?.title ?? ""}
+              caption={item?.author ?? ""}
+            />
+          </Grid>
+        ))}
+
+        <Grid item lg={12} md={12} sm={12} xs={12}>
+          <EditFormGroup
+            ref={formRef}
+            data={formData}
+            onChange={setFormData}
+            layout={[
+              {
+                label: "Book Title",
+                name: "title",
+                required: true,
+                fullWidth: true,
+              },
+              {
+                label: "Author",
+                name: "author",
+                required: true,
+                fullWidth: true,
+              },
+            ]}
+          />
+        </Grid>
         <Grid item>
-          <Button variant="contained" color="warning" startIcon={<Add />}>
+          <Button
+            onClick={handleAdd}
+            variant="contained"
+            color="warning"
+            startIcon={<Add />}
+          >
             Add
           </Button>
         </Grid>
-
-        {formatArray(data).map((item, itemIndex) => (
-          <Grid key={itemIndex} item lg={12} md={12} sm={12} xs={12}>
-            <Alert
-              severity="warning"
-              icon={false}
-              onClose={() => handleRemove(item, itemIndex)}
-            >
-              <AlertTitle>
-                <CustomTypo variant="h3" color="black">
-                  {item?.title ?? ""}
-                </CustomTypo>
-              </AlertTitle>
-              <CustomTypo variant="body2" color="warning">
-                {item?.author ?? ""}
-              </CustomTypo>
-            </Alert>
-          </Grid>
-        ))}
       </Grid>
     </div>
   );
