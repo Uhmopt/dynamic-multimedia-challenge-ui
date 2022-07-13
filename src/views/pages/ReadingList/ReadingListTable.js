@@ -1,5 +1,5 @@
 import { Add } from "@mui/icons-material";
-import { Button, Grid } from "@mui/material";
+import { Fab, Grid } from "@mui/material";
 import EditFormGroup from "components/EditFormGroup";
 import { ERR_NETWORK, MSG_INPUT_ALL } from "constants/messages";
 import { formatArray } from "lib/arrayObject";
@@ -88,14 +88,15 @@ export default function ReadingListTable({ user = {} }) {
           />
         </Grid>
         <Grid item>
-          <Button
+          <Fab
             onClick={handleAdd}
-            variant="contained"
+            variant="extended"
             color="warning"
-            startIcon={<Add />}
+            size="small"
           >
-            Add
-          </Button>
+            <Add />
+            Create
+          </Fab>
         </Grid>
       </Grid>
     </div>
