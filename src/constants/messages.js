@@ -10,6 +10,11 @@ export const MSG_SUCCESS_SAVED = {
   LONG: "Successfully saved",
 };
 
+export const MSG_SUCCESS_DELETED = {
+  SHORT: "Successfully deleted",
+  LONG: "Successfully deleted",
+};
+
 export const MSG_INPUT_ALL = {
   SHORT: "Fill all fields correctly.",
   LONG: "Please fill all fields correctly.",

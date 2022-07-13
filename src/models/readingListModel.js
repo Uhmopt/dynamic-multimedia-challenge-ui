@@ -10,6 +10,12 @@ export const saveReadingList = ({ data = {}, onFinish = () => {} }) => {
   }, 3000);
 };
 
+export const deleteReadingList = ({ data = {}, onFinish = () => {} }) => {
+  setTimeout(() => {
+    onFinish(true);
+  }, 3000);
+};
+
 export const DEFAULT_READING_LIST = [
   { title: "Book Title 1", author: "Author 1" },
   { title: "Book Title 2", author: "Author 2" },

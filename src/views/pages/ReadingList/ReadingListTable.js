@@ -1,11 +1,19 @@
 import { Add } from "@mui/icons-material";
 import { Fab, Grid } from "@mui/material";
 import EditFormGroup from "components/EditFormGroup";
-import { MSG_SUCCESS_SAVED } from "constants/messages";
-import { ERR_NETWORK, MSG_INPUT_ALL } from "constants/messages";
+import {
+  ERR_NETWORK,
+  MSG_INPUT_ALL,
+  MSG_SUCCESS_DELETED,
+  MSG_SUCCESS_SAVED,
+} from "constants/messages";
 import { formatArray } from "lib/arrayObject";
 import { openLoading } from "lib/store";
-import { getReadingList, saveReadingList } from "models/readingListModel";
+import {
+  deleteReadingList,
+  getReadingList,
+  saveReadingList,
+} from "models/readingListModel";
 import { useSnackbar } from "notistack";
 import { useEffect, useRef, useState } from "react";
 import ReadingListCard from "./ReadingListCard";
@@ -40,6 +48,23 @@ export default function ReadingListTable({ user = {} }) {
     });
   };
 
+  const handleDelete = (value) => {
+    openLoading(true);
+    deleteReadingList({
+      data: value,
+      onFinish: (res) => {
+        if (res) {
+          setFormData({});
+          enqueueSnackbar(MSG_SUCCESS_DELETED.LONG, { variant: "success" });
+          loadData();
+        } else {
+          enqueueSnackbar(ERR_NETWORK.LONG, { variant: "warning" });
+          openLoading(false);
+        }
+      },
+    });
+  };
+
   const loadData = () => {
     getReadingList({
       user_id: user?.id ?? "",
@@ -64,6 +89,7 @@ export default function ReadingListTable({ user = {} }) {
             <ReadingListCard
               title={item?.title ?? ""}
               caption={item?.author ?? ""}
+              onDelete={() => handleDelete(item, itemIndex)}
             />
           </Grid>
         ))}
