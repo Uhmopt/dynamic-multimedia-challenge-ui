@@ -41,7 +41,7 @@ export default function ReadingListTable({ user = {} }) {
               onClose={() => handleRemove(item, itemIndex)}
             >
               <AlertTitle>
-                <CustomTypo variant="h2" color="black">
+                <CustomTypo variant="h3" color="black">
                   {item?.title ?? ""}
                 </CustomTypo>
               </AlertTitle>
