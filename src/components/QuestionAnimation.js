@@ -3,7 +3,7 @@ import React from "react";
 import LottieIcon from "./LottieIcon";
 
 export default function QuestionAnimation({
-  width = window.innerWidth < 600 ? 150 : 350,
+  width = window.innerWidth < 600 ? 150 : 300,
 }) {
   return (
     <div>
