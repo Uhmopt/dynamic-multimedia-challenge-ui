@@ -1,6 +1,7 @@
 import { Add } from "@mui/icons-material";
 import { Fab, Grid } from "@mui/material";
 import EditFormGroup from "components/EditFormGroup";
+import { MSG_SUCCESS_SAVED } from "constants/messages";
 import { ERR_NETWORK, MSG_INPUT_ALL } from "constants/messages";
 import { formatArray } from "lib/arrayObject";
 import { openLoading } from "lib/store";
@@ -29,6 +30,7 @@ export default function ReadingListTable({ user = {} }) {
       onFinish: (res) => {
         if (res) {
           setFormData({});
+          enqueueSnackbar(MSG_SUCCESS_SAVED.LONG, { variant: "success" });
           loadData();
         } else {
           enqueueSnackbar(ERR_NETWORK.LONG, { variant: "warning" });
