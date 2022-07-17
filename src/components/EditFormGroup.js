@@ -123,7 +123,7 @@ export default forwardRef(function EditFormGroup(
 
   useEffect(() => {
     if (!isEmpty(propsData) || !isEmpty(data)) {
-      console.log("init");
+      // console.log("init");
       setData(propsData);
     }
     // eslint-disable-next-line

@@ -1,19 +1,30 @@
+import { serverGet, serverPost } from "./serverHelper";
+
 export const getReadingList = ({ user = {}, onFinish = () => {} }) => {
-  setTimeout(() => {
-    onFinish(DEFAULT_READING_LIST);
-  }, 3000);
+  serverGet({
+    url: "reading-list",
+    data: { user_id: user?.id },
+    onFinish: onFinish,
+    // onError: (err) => onFinish(false, err),
+  });
 };
 
 export const saveReadingList = ({ data = {}, onFinish = () => {} }) => {
-  setTimeout(() => {
-    onFinish(true);
-  }, 3000);
+  serverPost({
+    url: `reading-list/${data?.id ? "update" : "create"}`,
+    data: data,
+    onFinish: onFinish,
+    // onError: (err) => onFinish(false, err),
+  });
 };
 
 export const deleteReadingList = ({ data = {}, onFinish = () => {} }) => {
-  setTimeout(() => {
-    onFinish(true);
-  }, 3000);
+  serverPost({
+    url: `reading-list/delete/${data?.id}`,
+    // data: data,
+    onFinish: onFinish,
+    // onError: (err) => onFinish(false, err),
+  });
 };
 
 export const DEFAULT_READING_LIST = [

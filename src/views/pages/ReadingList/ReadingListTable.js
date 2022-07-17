@@ -37,12 +37,16 @@ export default function ReadingListTable({ user = {} }) {
       data: submitData,
       onFinish: (res) => {
         if (res) {
+          console.log("1");
           setFormData({});
           enqueueSnackbar(MSG_SUCCESS_SAVED.LONG, { variant: "success" });
           loadData();
+          return;
         } else {
+          console.log("2");
           enqueueSnackbar(ERR_NETWORK.LONG, { variant: "warning" });
           openLoading(false);
+          return;
         }
       },
     });
